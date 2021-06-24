@@ -13,9 +13,23 @@ const main = async () => {
             case 1:
                 const placeToSearch = await readInput("Ciudad: ");
                 const places = await search.city(placeToSearch);
+                //Select place
                 const IdPlaceSelected = await placeList(places);
                 const placeInfo = places.find(place => place.id = IdPlaceSelected)
-                console.log(placeInfo);
+                // Weather info
+                const weatherPlace = await search.weatherPlace({
+                    lat: placeInfo.lat,
+                    lon: placeInfo.lng
+                });
+                console.clear();
+                console.log('\n Informacion de la ciudad'.red);
+                console.log('Ciudad:', placeInfo.name.green);
+                console.log('Latitud:', placeInfo.lat);
+                console.log('Longitud:', placeInfo.lng);
+                console.log('Temperatura:', weatherPlace.temp);
+                console.log('Minima:', weatherPlace.min);
+                console.log('Maxima:', weatherPlace.max);
+                console.log('Clima:', weatherPlace.description.green);
                 break;
 
             default:
