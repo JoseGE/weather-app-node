@@ -1,13 +1,13 @@
 {
   "name": "weather-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "console app to search places and get their weather info",
   "main": "inde.js",
   "scripts": {
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jose Escoboso",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
