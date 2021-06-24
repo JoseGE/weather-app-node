@@ -88,29 +88,6 @@ const placeList = async (places = []) => {
     return id
 }
 
-const tasksCheckList = async (tasks = []) => {
-    const choices = tasks.map((task, i) => {
-        const idx = `${i + 1}`.green;
-        return {
-            value: task.id,
-            name: `${idx}. ${task.description}`,
-            checked: (task.completedDate) ? true : false
-        }
-    });
-
-    const configPrompt = [
-        {
-            type: 'checkbox',
-            name: 'ids',
-            message: 'Seleccione',
-            choices
-        }
-    ]
-    const { ids } = await inquirer.prompt(configPrompt);
-
-    return ids
-}
-
 const confirm = async (message) => {
     const configPrompt = [
         {

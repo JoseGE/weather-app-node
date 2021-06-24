@@ -1,11 +1,19 @@
 const axios = require('axios');
+const { save, read } = require('../helpers/dataFile');
 class Search {
-    historial = ['Guaricanos', 'Villa Mella', 'Buena Vista'];
+    history = [];
 
     constructor() {
-
+        this.history = read();
     }
+    get getHistory() {
+        return this.history.map(placeName => {
 
+            let words = placeName.split(' ');
+            placeName = words.map(w => w[0].toUpperCase() + w.substring(1))
+            return placeName.join(' ');
+        });
+    }
     async city(place = '') {
         try {
 
@@ -54,6 +62,15 @@ class Search {
         } catch (err) {
             return err;
         }
+    }
+    addHistory(placeName) {
+        if (this.history.includes(placeName.toLocaleLowerCase())) {
+            return;
+        }
+        // Limit history list 
+        this.history = this.history.splice(0, 5);
+        this.history.unshift(placeName.toLocaleLowerCase());
+        save(this.history);
     }
 }
 
